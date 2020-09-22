@@ -12,4 +12,14 @@ app.get("/api/workouts", (req, res) => {
     });
 });
 
+app.post("/api/workouts", (req, res) => {
+  Workout.create({})
+    .then((data) => res.json(data))
+    .catch((err) => {
+      console.log("err", err);
+      res.json(err);
+    });
+});
+
+app.put("/api/workouts/:id");
 module.exports = router;
