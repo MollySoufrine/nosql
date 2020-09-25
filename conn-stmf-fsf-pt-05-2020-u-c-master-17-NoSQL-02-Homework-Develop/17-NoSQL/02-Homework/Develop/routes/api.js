@@ -4,7 +4,7 @@ const Workout = require("../models/workout.js");
 // your routes here
 //this route will "get"/ show the workouts the user has already done
 //or are in progress
-app.get("/api/workouts", (req, res) => {
+router.get("/api/workouts", (req, res) => {
   Workout.find()
     .then((data) => {
       res.json(data);
@@ -14,7 +14,7 @@ app.get("/api/workouts", (req, res) => {
     });
 });
 //when a new workout is created, post will create it
-app.post("/api/workouts", (req, res) => {
+router.post("/api/workouts", (req, res) => {
   Workout.create({})
     .then((data) => res.json(data))
     .catch((err) => {
@@ -22,8 +22,8 @@ app.post("/api/workouts", (req, res) => {
       res.json(err);
     });
 });
-
-app.put("/api/workouts/:id", ({ body, params }, res) => {
+// update a current or previous workout
+router.put("/api/workouts/:id", ({ body, params }, res) => {
   Workout.findByIdAndUpdate(
     params.id,
     { $push: { exercises: body } },
